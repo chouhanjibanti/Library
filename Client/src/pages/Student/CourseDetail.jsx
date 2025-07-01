@@ -14,11 +14,11 @@ function CourseDetail() {
      const {data,isLoading,isError} = useGetCourseDetailWithStatusQuery(CourseId)
       
     const checkOutHandler = async (CourseId) => {
-        const {data:{key}} = await axios.get("http://localhost:8080/api/v1/payment/getKey",{
+        const {data:{key}} = await axios.get("https://library-2-8qze.onrender.com/api/v1/payment/getKey",{
             withCredentials: true
         })
  
-         const {data:{order}} = await axios.post("http://localhost:8080/api/v1/payment/checkout",{
+         const {data:{order}} = await axios.post("https://library-2-8qze.onrender.com/api/v1/payment/checkout",{
            CourseId,
          },
          { withCredentials: true }
@@ -49,7 +49,7 @@ function CourseDetail() {
 
             // 🔹 Send the response data to your backend for verification
             const verifyResponse = await axios.post(
-                `http://localhost:8080/api/v1/payment/paymentVerification/${CourseId}`,
+                `https://library-2-8qze.onrender.com/api/v1/payment/paymentVerification/:CourseId`,
                 {
                     razorpay_payment_id: response.razorpay_payment_id,
                     razorpay_order_id: response.razorpay_order_id,

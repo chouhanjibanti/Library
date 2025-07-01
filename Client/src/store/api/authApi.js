@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { login, logout } from "../slices/authSlice";
 
-const user_Api = "http://localhost:8080/api/v1/user/";
+// const user_Api = "http://localhost:8080/api/v1/user/";
+const user_Api = import.meta.env.VITE_API_URL + "/user/";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  tagTypes:["Refetch_user_profile"],
+  tagTypes: ["Refetch_user_profile"],
   baseQuery: fetchBaseQuery({
     baseUrl: user_Api,
     credentials: "include",
@@ -22,8 +23,8 @@ export const authApi = createApi({
       }),
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
-        const result =  await queryFulfilled;
-        //  console.log(result.data);
+          const result = await queryFulfilled;
+          //  console.log(result.data);
         } catch (error) {
           console.log(error);
         }
@@ -38,7 +39,7 @@ export const authApi = createApi({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          // console.log(result);  
+          // console.log(result);
           dispatch(login({ user: result.data.user }));
         } catch (error) {
           console.log(error);
@@ -50,17 +51,16 @@ export const authApi = createApi({
         url: "logout",
         method: "GET",
       }),
-      async onQueryStarted(_,{queryFulfilled,dispatch}){
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          dispatch(logout())
+          dispatch(logout());
         } catch (error) {
           console.log(error);
-          
         }
-      }
+      },
     }),
-    loadUser:builder.query({
+    loadUser: builder.query({
       query: () => ({
         url: "profile",
         method: "GET",
@@ -73,18 +73,23 @@ export const authApi = createApi({
           // console.log(error);
         }
       },
-      providesTags:["Refetch_user_profile"]
+      providesTags: ["Refetch_user_profile"],
     }),
     updateUser: builder.mutation({
-          query:(formData) =>({
-            url: "profile/update",
-            method: "PUT",
-            body:formData,
-            credentials:"include",
-          
-          }),
-          invalidatesTags:["Refetch_user_profile"],
-    })
+      query: (formData) => ({
+        url: "profile/update",
+        method: "PUT",
+        body: formData,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Refetch_user_profile"],
+    }),
   }),
 });
-export const {useRegisterUserMutation,useLoginUserMutation,useLoadUserQuery,useUpdateUserMutation,useLogOutuserMutation} =authApi
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useLoadUserQuery,
+  useUpdateUserMutation,
+  useLogOutuserMutation,
+} = authApi;

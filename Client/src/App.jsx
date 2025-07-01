@@ -25,10 +25,8 @@ import {
 import PurchaseCourseProtectedRoute from "./components/PurchaseCourseProtectedRoute";
 import axios from "axios";
 
-
 const BASE_URL = import.meta.env.VITE_API_URL;
-
-axios.get(`${BASE_URL}/api/xyz`);
+axios.get(`${BASE_URL}/xyz`); // ✅ this is correct
 
 
 const router = createBrowserRouter([
