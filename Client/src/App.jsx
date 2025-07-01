@@ -12,7 +12,7 @@ import CourseTable from "./pages/Admin/course/CourseTable";
 import CreateCourse from "./pages/Admin/course/CreateCourse";
 import EditCourse from "./pages/Admin/course/EditCourse";
 import CreateLecture from "./pages/Admin/lecture/CreateLecture";
-import EditLecture from "./pages/Admin/lecture/editLecture";
+import EditLecture from "./pages/Admin/lecture/EditLecture";
 import ErrorPage from "./pages/ErrorPage";
 import CourseDetail from "./pages/Student/CourseDetail";
 import CourseProgress from "./pages/Student/CourseProgress";
