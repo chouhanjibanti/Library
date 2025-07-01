@@ -24,7 +24,7 @@ app.use(cors({
 }))
 
 // connect frontend to backend
-const cors = require("cors"); 
+// const cors = require("cors"); 
 
 // allow frontend from vercel
 app.use(cors({
