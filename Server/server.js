@@ -23,6 +23,16 @@ app.use(cors({
     credentials: true, 
 }))
 
+// connect frontend to backend
+import cors from "cors";
+
+// allow frontend from vercel
+app.use(cors({
+  origin: "https://library-vvb7.vercel.app",  // allow frontend origin
+  credentials: true
+}));
+
+
 // Connect to razorpay
 export const instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
